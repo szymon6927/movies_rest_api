@@ -99,16 +99,24 @@ class OMDBMovie:
 
     @property
     def metascore(self):
-        return int(self.movie_info['Metascore'])
+        try:
+            return int(self.movie_info['Metascore'])
+        except ValueError:
+            return 0
 
     @property
     def imdb_rating(self):
-        return float(self.movie_info['imdbRating'])
+        try:
+            return float(self.movie_info['imdbRating'])
+        except ValueError:
+            return 0.0
 
     @property
     def imdb_votes(self):
-        return float(self.movie_info['imdbVotes'].replace(",", "."))
-
+        try:
+            return float(self.movie_info['imdbVotes'].replace(",", "."))
+        except ValueError:
+            return 0.0
     @property
     def imdb_id(self):
         return self.movie_info['imdbID']
