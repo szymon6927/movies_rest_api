@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'django_filters',
 
     'movies'
 ]
@@ -165,4 +166,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+USING_SQLLITE = config('SQLITE', default=True, cast=bool)
 OMDD_API_KEY = config('OMDb_API_KEY', default='')
