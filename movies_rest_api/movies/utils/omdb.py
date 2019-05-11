@@ -1,5 +1,9 @@
 from django.conf import settings
+import logging
 import requests
+from requests.exceptions import Timeout, TooManyRedirects, RequestException
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OMDBMovie:
@@ -10,16 +14,32 @@ class OMDBMovie:
         self.movie_info = self.get_movie_info()
 
     def get_movie_info(self):
-        response = requests.get(f'{self.ROOT_URL}&t={self.movie_title}')
 
-        if response.status_code == 200:
-            return response.json()
-        elif response.json()['Type'] != "movie":
-            print("You are searching not a movie")
-            return {}
-        else:
-            print("Somthing wrong! Try again")
-            return {}
+        try:
+            response = requests.get(f'{self.ROOT_URL}&t={self.movie_title}')
+
+            if response.status_code == 200:
+                LOGGER.info(f"Successfully fetched data for {self.movie_title} movie")
+                return response.json()
+            elif response.json()['Type'] != "movie":
+                LOGGER.error(f"Looking for not a movie ({self.movie_title})")
+                return None
+
+            return None
+        except Timeout:
+            LOGGER.exception("Timeout form OMDB API")
+            return None
+        except TooManyRedirects:
+            LOGGER.exception("To many redirects form OMDB API")
+            return None
+        except RequestException as e:
+            LOGGER.exception(f"Request exception form OMDB API, full message {e}")
+            return None
+
+    @property
+    def exist(self):
+        """If 'Error' key exist in OMDB response that means the movie does not exist"""
+        return 'Error' not in self.movie_info
 
     @property
     def year(self):
@@ -72,6 +92,10 @@ class OMDBMovie:
     @property
     def poster(self):
         return self.movie_info['Poster']
+
+    @property
+    def ratings(self):
+        return self.movie_info['Ratings']
 
     @property
     def metascore(self):
