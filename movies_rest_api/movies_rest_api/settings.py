@@ -126,7 +126,7 @@ LOGGING = {
             'level': 'ERROR',
             'formatter': 'standard',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BACKEND_LOG_DIR, 'nordicinvoices.log'),
+            'filename': os.path.join(BACKEND_LOG_DIR, 'movies_rest_api.log'),
         },
     },
     'root': {
