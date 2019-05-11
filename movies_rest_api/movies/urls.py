@@ -6,7 +6,7 @@ from .views import MovieListView, CommentsListView, TopMovieListView, api_root
 urlpatterns = [
     path('movies/', MovieListView.as_view(), name="all-movies"),
     path('comments/', CommentsListView.as_view(), name="all-comments"),
-    path('top/', TopMovieListView.as_view(), name="top-commented-movie"),
+    path('top/', TopMovieListView.as_view(), name="top-movies"),
     path('', api_root)
 ]
 
