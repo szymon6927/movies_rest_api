@@ -78,7 +78,6 @@ class Movie(models.Model):
 
     class Meta:
         verbose_name_plural = "movies"
-        ordering = ('created',)
 
 
 class Comment(models.Model):
@@ -92,7 +91,6 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = "comments"
-        ordering = ('created',)
 
 
 class MovieRating(models.Model):
@@ -103,8 +101,7 @@ class MovieRating(models.Model):
     updated = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
-        return f'Movie rating for {self.movie.title}'
+        return f'Rating (OMDb API) for {self.movie.title} movie'
 
     class Meta:
         verbose_name_plural = "ratings"
-        ordering = ('created',)
