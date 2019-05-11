@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_title = "Movies REST API"
+admin.site.site_header = "Movies REST API Admin"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('movies.urls'))
