@@ -7,6 +7,8 @@ LOGGER = logging.getLogger(__name__)
 
 
 class OMDBMovie:
+    """Wrapper for omdbapi response"""
+
     ROOT_URL = f"http://www.omdbapi.com/?apikey={settings.OMDD_API_KEY}"
 
     def __init__(self, movie_title):
@@ -117,6 +119,7 @@ class OMDBMovie:
             return float(self.movie_info['imdbVotes'].replace(",", "."))
         except ValueError:
             return 0.0
+
     @property
     def imdb_id(self):
         return self.movie_info['imdbID']

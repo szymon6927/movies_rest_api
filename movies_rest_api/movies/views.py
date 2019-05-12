@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.db.models import Count
 from django.db.models import F, Window
 from django.db.models.functions import DenseRank
@@ -37,6 +36,18 @@ class MovieListView(ListCreateAPIView):
     get:
     Return a list of all the existing movies.
 
+    Available filters:
+    - title
+    - title__icontains
+
+    Available sorting methods:
+    - ordering=id (ascending)
+    - ordering=-id (descending)
+    - ordering=title (ascending)
+    - ordering=-title (descending)
+    - ordering=created (ascending)
+    - ordering=-created (descending)
+
     post:
     Create a new movie. Set title and then all others information about movie will be fetched form OMDB API.
     Of course if you want to set all of the filed manually you can!
@@ -67,6 +78,7 @@ class CommentsListView(ListCreateAPIView):
         movie_id = self.request.query_params.get('movie_id', None)
 
         if movie_id:
+            LOGGER.info(f"Filtering comment for movie.id = {movie_id}")
             queryset = queryset.filter(movie__id=movie_id)
 
         return queryset
@@ -120,6 +132,8 @@ class TopMovieListView(ListAPIView):
             LOGGER.exception('Date parsing error')
 
     def build_response_sqlite(self):
+        """Workaround - sqlite does not support Window functions"""
+
         json_response = []
         queryset = self.get_queryset()
 

@@ -41,11 +41,6 @@ class BaseViewTest(APITestCase):
 class MoviesTests(BaseViewTest):
 
     def test_get_all_movies(self):
-        """
-        This test ensures that all movies added in the setUp method
-        exist when we make a GET request to the movies/ endpoint
-        """
-
         response = self.client.get(reverse("all-movies"))
 
         expected = Movie.objects.all()
