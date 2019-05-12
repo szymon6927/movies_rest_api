@@ -170,5 +170,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+if not DEBUG:
+    ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+    STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/')
+    MEDIA_ROOT = os.path.join(ENV_PATH, '../public/media/')
+
 USING_SQLLITE = config('SQLITE', default=True, cast=bool)
 OMDD_API_KEY = config('OMDb_API_KEY', default='')
