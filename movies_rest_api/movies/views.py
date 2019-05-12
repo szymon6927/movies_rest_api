@@ -34,7 +34,12 @@ def api_root(request, format=None):
 
 class MovieListView(ListCreateAPIView):
     """
-    Provides a get method handler.
+    get:
+    Return a list of all the existing movies.
+
+    post:
+    Create a new movie. Set title and then all others information about movie will be fetched form OMDB API.
+    Of course if you want to set all of the filed manually you can!
     """
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
@@ -45,6 +50,16 @@ class MovieListView(ListCreateAPIView):
 
 
 class CommentsListView(ListCreateAPIView):
+    """
+    get:
+    Return a list of all the existing movie comments.
+
+    Set 'movie_id' query params if you want list of comments for give movie
+    Eg. /comments?movie_id=1
+
+    post:
+    Create a new comment for given movie.
+    """
     serializer_class = CommentSerializer
 
     def get_queryset(self):
@@ -58,6 +73,16 @@ class CommentsListView(ListCreateAPIView):
 
 
 class TopMovieListView(ListAPIView):
+    """
+    get:
+    Return a rank list of top movies in given date range based on comments count.
+
+    Required query_params:
+    - date_from (d-m-Y)
+    - date_to (d-m-Y)
+
+    eg. /top?date_from=10-05-2019&date_to=12-05-2019
+    """
     serializer_class = MovieSerializer
 
     def get_queryset(self):

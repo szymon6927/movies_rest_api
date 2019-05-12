@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
+    'rest_framework_swagger',
 
     'movies'
 ]
@@ -150,6 +151,25 @@ LOGGING = {
 
 REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',  # Use application/json instead of multipart/form-data requests in tests.
+}
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'api_version': '1',
+    'api_path': '/',
+    'relative_paths': False,
+    'enabled_methods': [
+        'get',
+        'post'
+    ],
+    'is_authenticated': False,
+    'is_superuser': False,
+    'info': {
+        'contact': 'miks.szymon@gmail.com',
+        'description': 'Movies REST API documentation for Netguru recruitment task',
+        'title': 'Movies REST API',
+    },
+    'doc_expansion': 'none',
 }
 
 # Internationalization
