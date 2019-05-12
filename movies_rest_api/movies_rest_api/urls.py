@@ -21,5 +21,5 @@ admin.site.site_header = "Movies REST API Admin"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('movies.urls'))
+    path('', include('movies.urls'))
 ]
