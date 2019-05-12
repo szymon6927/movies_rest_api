@@ -52,7 +52,7 @@ class CommentsListView(ListCreateAPIView):
         movie_id = self.request.query_params.get('movie_id', None)
 
         if movie_id:
-            queryset = queryset.filter(movie_id=movie_id)
+            queryset = queryset.filter(movie__id=movie_id)
 
         return queryset
 
@@ -74,8 +74,6 @@ class TopMovieListView(ListAPIView):
                 ).annotate(
                     total_comments=Count('comment')
                 ).order_by('-total_comments')
-
-                print(f"top_movies: {top_movies}")
 
                 return top_movies
             else:
