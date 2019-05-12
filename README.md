@@ -4,6 +4,10 @@ Netguru recruitment task
 
 Application URL [http://movies-netguru.szymonmiks.pl](http://movies-netguru.szymonmiks.pl)
 
+## Prerequisites
+
+To start you have to have installed `Python 3.7.2`
+
 ## Getting Started
 To start the project locally
 
@@ -51,10 +55,6 @@ open a browser and go to
 http://127.0.0.1:8000
 ```
 
-### Prerequisites
-
-To start you have to have installed `Python 3.7.2`
-
 
 ## Running the tests
 
@@ -74,6 +74,18 @@ $ python manage.py test
 
 To deploy changes all you need to do is to push changes into
 `master` branch. I used [Buddy](https://buddy.works/) CI/CD tools.
+
+
+## Requirements
+
+I decided to use a few third-party libraries. Here is the reasoning behind choosing them
+
+- Django REST framework - powerful toolkit for building APIs, the huge community, great eco-system, a lot of education materials
+- Django REST Swagger - for me Swagger UI is the best UI toolkit for automatically generated API documentation
+- requests - probably the most popular and the best package for sending HTTP requests. More friendly than python urllib
+- python-decouple - helps me separate the settings parameters from source code
+- django-filter - a great library which allows customization field filtering. 
+Recommended in the documentation of Django REST framework
 
 
 ## Authors
