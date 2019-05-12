@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['movies-netguru.szymonmiks.pl']
+ALLOWED_HOSTS = ['127.0.0.1', 'movies-netguru.szymonmiks.pl']
 
 # Application definition
 
@@ -170,10 +170,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if not DEBUG:
-    ENV_PATH = os.path.abspath(os.path.dirname(__file__))
-    STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/')
-    MEDIA_ROOT = os.path.join(ENV_PATH, '../public/media/')
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/')
+MEDIA_ROOT = os.path.join(ENV_PATH, '../public/media/')
 
 USING_SQLLITE = config('SQLITE', default=True, cast=bool)
 OMDD_API_KEY = config('OMDb_API_KEY', default='')
