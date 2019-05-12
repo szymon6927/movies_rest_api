@@ -4,6 +4,8 @@ Netguru recruitment task
 
 Application URL [http://movies-netguru.szymonmiks.pl](http://movies-netguru.szymonmiks.pl)
 
+API documentation [http://movies-netguru.szymonmiks.pl/docs/](http://movies-netguru.szymonmiks.pl/docs/)
+
 ## Prerequisites
 
 To start you have to have installed `Python 3.7.2`
